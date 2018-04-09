@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 // window.scrollTo(x,y) on click to scroll to a position
 import './App.css';
 
+import GitHubLogo from './Assets/GitHub-Mark-64px.png';
+import LinkedInLogo from './Assets/Linkedin.svg';
 import ReactLogo from './Assets/react-logo.png';
 import ReduxLogo from './Assets/ReduxLogo.png';
 import NodeLogo from './Assets/logo_js.svg';
@@ -45,43 +47,46 @@ class App extends Component {
         super();
 
         this.state = {
-            slide: 0,
-            logo: JSLogo
+            skillsHeight: '0',
+            skillsToggle: false,
+        }
+        this.toggleSkills = this.toggleSkills.bind(this);
+    }
+
+    toggleSkills() {
+        if ( this.state.skillsHeight === '0') {
+            this.setState({ skillsHeight: '100vh', skillsToggle: true });
+        } else {
+            this.setState({ skillsHeight: '0', skillsToggle: false });
         }
     }
 
     render() {
-        let logo = HTMLLogo;
-        setTimeout(() => {
-            if ( this.state.slide >= 4 ) {
-                this.setState({ slide: 0 });
-            } else {
-                this.setState({ slide: this.state.slide + 1})
-            }
-        }, 1500);
-
+        console.log(this.state.skillsHeight)
         return (
-            <div>
-                <div className="body">
+            <div className="body">
+                <div className="info">
                     <h3><i>Jr. Full-Stack Web Developer</i></h3>
-                    <h1>Michael Stillwell</h1>
-                    {/* <img src={logo} className="slider" /> */}
-                    <ul id="slides">
-                        <li className="slide showing"><img src={JSLogo} alt="JavaScript"/></li>
-                        <li className="slide"><img src={HTMLLogo} alt="HTML"/></li>
-                        <li className="slide"><img src={CSSLogo} alt="CSS"/></li>
-                        <li className="slide"><img src={ReactLogo} alt="React"/></li>
-                    </ul>
-                    {/* <img src={ReactLogo} alt="React"/>
-                    <img src={ReduxLogo} alt="Redux"/>
-                    <img src={NodeLogo} alt="Logo"/>
-                    <img src={PostLogo} alt="PostgreSQL"/>
-                    <img src={ElectronLogo} alt="Electron"/>
+                    <h1><strong>MICHAEL STILLWELL</strong></h1>
+                    <div>
+                        <a href="https://github.com/michaelStillwell" target="_blank"><img className="links" src={GitHubLogo} alt="GitHub"/></a>
+                        <a href="https://linkedin.com/in/mstillwellwebdev/" target="_blank"><img className="links" src={LinkedInLogo} alt="LinkedIn"/></a>
+                    </div>
+                </div>
+
+                <input type="checkbox" checked={this.state.skillsToggle} />
+                <div className="skills-button" onClick={this.toggleSkills}><i>Skills</i></div>
+                <div className="skills" style={{ height: this.state.skillsHeight }}>
+                    <img src={JSLogo} alt="JavaScript"/>
                     <img src={HTMLLogo} alt="HTML"/>
                     <img src={CSSLogo} alt="CSS"/>
+                    <img src={NodeLogo} alt="Node"/>
+                    <img src={PostLogo} alt="PostgreSQL"/>
+                    <img src={ElectronLogo} alt="Electron"/>
+                    <img src={ReactLogo} alt="React"/>
+                    <img src={ReduxLogo} alt="Redux"/>
                     <img src={SassLogo} alt="Sass"/>
-                    <img src={JSLogo} alt="JavaScript"/>
-                    <img src={GMLLogo} alt="GML"/> */}
+                    <img src={GMLLogo} alt="GML"/>
                 </div>
             </div>
         )
