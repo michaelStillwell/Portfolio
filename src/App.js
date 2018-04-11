@@ -46,9 +46,6 @@ class App extends Component {
         super();
 
         this.state = {
-            skillsHeight: '0',
-            skillsToggle: false,
-            skillsShowing: [0, 1, 2],
             skills: [
                 {src: JSLogo,       alt: 'JavaScript'},
                 {src: HTMLLogo,     alt: 'HTML'},
@@ -64,7 +61,7 @@ class App extends Component {
             projectsHeight: '0',
             projectsWidth: '0',
             projectsToggle: false,
-            projectsCurrent: 1,
+            projectsCurrent: 0,
             projects: [
                 {title: 'Warehouse Management App', description: `
                 A way for a company's warehouse maintain their current products, orders, stock, and pricing 
@@ -81,7 +78,7 @@ class App extends Component {
                     'Node JS', 
                     'Express', 
                     'PostgreSQL'
-                ]},
+                ], link: ''},
                 {title: 'chatOverflow', description: `
                 A chat application focused on providing a way for developers to interact between each other.
                 `, technologies: [
@@ -90,23 +87,14 @@ class App extends Component {
                     'Socket IO',
                     'Hightlight JS',
                     'Material UI',
-                ]}
+                ], link: ''}
             ]
         }
-        this.toggleSkills = this.toggleSkills.bind(this);
-        this.changeSkills = this.changeSkills.bind(this);
         this.toggleProjects = this.toggleProjects.bind(this);
         this.changeProjects = this.changeProjects.bind(this);
     }
 
-    toggleSkills() {
-        if ( this.state.skillsHeight === '0' ) {
-            this.setState({ skillsHeight: '130px', skillsToggle: true });
-        } else {
-            this.setState({ skillsHeight: '0', skillsToggle: false });
-        }
-    }
-
+    // Potential usecase
     changeSkills() {
         let {skills, skillsShowing} = this.state, newSkills = skillsShowing;
         
@@ -120,7 +108,7 @@ class App extends Component {
 
     toggleProjects() {
         if ( this.state.projectsHeight === '0' ) {
-            this.setState({ projectsHeight: '100vh', projectsWidth: '50vw', projectsToggle: true });
+            this.setState({ projectsHeight: '30vh', projectsWidth: '200vh', projectsToggle: true });
         } else {
             this.setState({ projectsHeight: '0', projectsWidth: '0', projectsToggle: false });
         }
@@ -150,29 +138,25 @@ class App extends Component {
         return (
             <div className="body">
                 <div className="info">
-                    <h3>Full-Stack Web Developer</h3>
-                    <h1>MICHAEL STILLWELL</h1>
-                    <div className="contact">
-                        <p>(210) 724-0779</p>
-                        <p>michael.stillwell@hotmail.com</p>
+                    <div className="header">
+                        <h3>Full-Stack Web Developer</h3>
+                        <h1>MICHAEL STILLWELL</h1>
+                        <div className="contact">
+                            <p>(210) 724-0779</p>
+                            <p>michael.stillwell@hotmail.com</p>
+                        </div>
                     </div>
                     <div className="links-container">
                         <a href="https://github.com/michaelStillwell" target="_blank"><img className="links" src={GitHubLogo} alt="GitHub"/></a>
                         <a href="https://linkedin.com/in/mstillwellwebdev/" target="_blank"><img className="links" src={LinkedInLogo} alt="LinkedIn"/></a>
                     </div>
                 </div>
-
-                <input id="skills-toggle" type="checkbox" checked={skillsToggle} />
-                <div className="skills-button" onClick={this.toggleSkills}><i>Skills</i></div>
-                <div className="skills" style={{ height: skillsHeight }}>
-                    {skillsShowing.map((x, y) => (
-                        <img id="skill" key={y} src={skills[x].src} alt={skills[x].alt} />
-                    ))}
-                    <button onClick={this.changeSkills}>&raquo;</button>
+                <div className="skills">
+                    {this.state.skills.map((x, y) => <img id="skill" key={y} src={x.src} alt={x.alt} />)}
                 </div>
                 <input id="projects-toggle" type="checkbox" checked={projectsToggle} />
-                {/* <div className="projects-button" onClick={this.toggleProjects}></div> */}
-                <div className="projects" style={{ width: projectsWidth }}>
+                <div className="projects-button" onClick={this.toggleProjects}></div>
+                <div className="projects" style={{ height: projectsHeight }}>
                     <h2>{projects[projectsCurrent].title}</h2>
                     <p>{projects[projectsCurrent].description}</p>
                     <label>Technologies Used:</label>
@@ -183,6 +167,18 @@ class App extends Component {
                     </ul>
                     <button onClick={this.changeProjects}>></button>
                 </div>
+                {/* <div id="container">
+                    <header>
+                    <h1>Animated Photo Banner</h1>
+                    <p>Lorem ipsum dolor...</p>
+                    </header>
+                    
+                    <div class="photobanner">
+                        <img class="first" src={JSLogo} alt="" />
+                        {this.state.skills.map(x => <img src={x.src} />)}
+                        {this.state.skills.map((x,y) => y <= 4 ? <img src={x.src} /> : false)}
+                    </div>
+                </div> */}
             </div>
         )
     }
