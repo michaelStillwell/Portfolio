@@ -5,28 +5,29 @@ import './App.css';
 
 import GitHubLogo from './Assets/GitHub-Mark-64px.png';
 import LinkedInLogo from './Assets/Linkedin.svg';
-import ReactLogo from './Assets/react-logo.png';
-import ReduxLogo from './Assets/ReduxLogo.png';
+import JSLogo from './Assets/javascript_logo.png';
+import HTMLLogo from './Assets/html_logo.png';
+import CSSLogo from './Assets/css_logo.svg';
+import GraphQLLogo from './Assets/GraphQL_Logo.svg.png';
 import NodeLogo from './Assets/logo_js.svg';
 import PostLogo from './Assets/PostgreSQL.png';
 import ElectronLogo from './Assets/electron_logo.svg';
-import HTMLLogo from './Assets/html_logo.png';
-import CSSLogo from './Assets/css_logo.svg';
+import ReactLogo from './Assets/react-logo.png';
+import ReduxLogo from './Assets/ReduxLogo.png';
 import SassLogo from './Assets/sass_logo.png';
-import JSLogo from './Assets/javascript_logo.png';
 import GMLLogo from './Assets/gml_logo.png';
 
 // <div>
 
-//     <div id="body">
-//         <h3><i>Fullstack Web Developer</i></h3>
-//         <h1><strong>MICHAEL STILLWELL</strong></h1>
-//         <p>Connect With Me:</p>
-//         <div>
-//             <p>GitHub</p>
-//             <p>LinkedIn</p>
-//         </div>
-//     </div>
+// <div id="body">
+// <h3><i>Fullstack Web Developer</i></h3>
+// <h1><strong>MICHAEL STILLWELL</strong></h1>
+// <p>Connect With Me:</p>
+// <div>
+// <p>GitHub</p>
+// <p>LinkedIn</p>
+// </div>
+// </div>
 // </div>
 
 // <ul id="skills">
@@ -50,6 +51,7 @@ class App extends Component {
                 {src: JSLogo,       alt: 'JavaScript'},
                 {src: HTMLLogo,     alt: 'HTML'},
                 {src: CSSLogo,      alt: 'CSS'},
+                {src: GraphQLLogo,  alt: 'GraphQL'},
                 {src: NodeLogo,     alt: 'Node'},
                 {src: PostLogo,     alt: 'PostgreSQL'},
                 {src: ElectronLogo, alt: 'Electron'},
@@ -59,7 +61,6 @@ class App extends Component {
                 {src: GMLLogo,      alt: 'GML'}
             ],
             projectsHeight: '0',
-            projectsWidth: '0',
             projectsToggle: false,
             projectsCurrent: 0,
             projects: [
@@ -71,23 +72,21 @@ class App extends Component {
                 had worked with that had a very big problem with communication between the employees working in the 
                 field and the ones fulfilling their orders.
                 `, technologies: [
-                    'JavaScript', 
                     'React JS', 
                     'Sass, SCSS',
                     'Redux', 
                     'Node JS', 
                     'Express', 
                     'PostgreSQL'
-                ], link: ''},
+                ], link: 'http://159.89.50.120/#/', github: 'https://github.com/michaelStillwell/Personal-Project'},
                 {title: 'chatOverflow', description: `
                 A chat application focused on providing a way for developers to interact between each other.
                 `, technologies: [
-                    'JavaScript',
                     'Node JS',
                     'Socket IO',
                     'Hightlight JS',
                     'Material UI',
-                ], link: ''}
+                ], link: 'https://chatoverflow.xyz', github: 'https://github.com/Slack-Team/slack-team'},
             ]
         }
         this.toggleProjects = this.toggleProjects.bind(this);
@@ -95,30 +94,30 @@ class App extends Component {
     }
 
     // Potential usecase
-    changeSkills() {
-        let {skills, skillsShowing} = this.state, newSkills = skillsShowing;
+    // changeSkills() {
+    //     let {skills, skillsShowing} = this.state, newSkills = skillsShowing;
         
-        newSkills.shift();
-        newSkills[1] >= 9
-            ? newSkills.push(0)
-            : newSkills.push(newSkills[1]+1);
+    //     newSkills.shift();
+    //     newSkills[1] >= 9
+    //         ? newSkills.push(0)
+    //         : newSkills.push(newSkills[1]+1);
 
-        this.setState({ skillsShowing: newSkills });
-    }
+    //     this.setState({ skillsShowing: newSkills });
+    // }
 
     toggleProjects() {
         if ( this.state.projectsHeight === '0' ) {
-            this.setState({ projectsHeight: '30vh', projectsWidth: '200vh', projectsToggle: true });
+            this.setState({ projectsHeight: '50vh', projectsToggle: true });
         } else {
-            this.setState({ projectsHeight: '0', projectsWidth: '0', projectsToggle: false });
+            this.setState({ projectsHeight: '0', projectsToggle: false });
         }
     }
 
-    changeProjects() {
-        if ( this.state.projectsCurrent + 1 >= this.state.projects.length ) {
-            this.setState({ projectsCurrent: 0 });
-        } else {
+    changeProjects(dir) {
+        if ( dir === 'inc' ) {
             this.setState({ projectsCurrent: this.state.projectsCurrent + 1 });
+        } else if ( dir === 'dec' ) {
+            this.setState({ projectsCurrent: this.state.projectsCurrent - 1});
         }
     }
 
@@ -147,38 +146,35 @@ class App extends Component {
                         </div>
                     </div>
                     <div className="links-container">
-                        <a href="https://github.com/michaelStillwell" target="_blank"><img className="links" src={GitHubLogo} alt="GitHub"/></a>
-                        <a href="https://linkedin.com/in/mstillwellwebdev/" target="_blank"><img className="links" src={LinkedInLogo} alt="LinkedIn"/></a>
+                        <a href="https://github.com/michaelStillwell" target="_blank" rel="noopener noreferrer"><img className="links" src={GitHubLogo} alt="GitHub"/></a>
+                        <a href="https://linkedin.com/in/mstillwellwebdev/" target="_blank" rel="noopener noreferrer"><img className="links" src={LinkedInLogo} alt="LinkedIn"/></a>
                     </div>
                 </div>
                 <div className="skills">
-                    {this.state.skills.map((x, y) => <img id="skill" key={y} src={x.src} alt={x.alt} />)}
+                    {skills.map((x, y) => <img id="skill" key={y} src={x.src} alt={x.alt} />)}
                 </div>
                 <input id="projects-toggle" type="checkbox" checked={projectsToggle} />
                 <div className="projects-button" onClick={this.toggleProjects}></div>
                 <div className="projects" style={{ height: projectsHeight }}>
+                    <div className="projects-cycler">
+                        {projectsCurrent !== 0 ? <a className="previous-button" onClick={() => this.changeProjects('dec')}>&lt;-- Prev Project</a> : false}
+                        {projectsCurrent !== projects.length-1 ? <a className="next-button" onClick={() => this.changeProjects('inc')}>Next Project --></a> : false}
+                    </div>
                     <h2>{projects[projectsCurrent].title}</h2>
+                    <div>
+                        {projects[projectsCurrent].github !== '' ? <a href={projects[projectsCurrent].github} target="_blank" rel="noopener noreferrer">-- GitHub Repository --</a> : false}
+                    </div>
                     <p>{projects[projectsCurrent].description}</p>
+                    <div>
+                        {projects[projectsCurrent].link !== '' ? <a target="_blank" rel="noopener noreferrer" href={projects[projectsCurrent].link}>-- Go to Live Site --</a> : false}
+                    </div>
                     <label>Technologies Used:</label>
                     <ul>
                         {projects[projectsCurrent].technologies.map((x, y) => (
                             <li key={y}>{x}</li>
                         ))}
                     </ul>
-                    <button onClick={this.changeProjects}>></button>
                 </div>
-                {/* <div id="container">
-                    <header>
-                    <h1>Animated Photo Banner</h1>
-                    <p>Lorem ipsum dolor...</p>
-                    </header>
-                    
-                    <div class="photobanner">
-                        <img class="first" src={JSLogo} alt="" />
-                        {this.state.skills.map(x => <img src={x.src} />)}
-                        {this.state.skills.map((x,y) => y <= 4 ? <img src={x.src} /> : false)}
-                    </div>
-                </div> */}
             </div>
         )
     }
