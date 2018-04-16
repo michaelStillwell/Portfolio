@@ -15,6 +15,7 @@ import ElectronLogo from './Assets/electron_logo.svg';
 import ReactLogo from './Assets/react-logo.png';
 import ReduxLogo from './Assets/ReduxLogo.png';
 import SassLogo from './Assets/sass_logo.png';
+import BFLogo from './Assets/BFLogo.png';
 import GMLLogo from './Assets/gml_logo.png';
 
 // <div>
@@ -58,6 +59,7 @@ class App extends Component {
                 {src: ReactLogo,    alt:'React'},
                 {src: ReduxLogo,    alt: 'Redux'},
                 {src: SassLogo,     alt: 'Sass'},
+                {src: BFLogo,       alt: 'BF'},
                 {src: GMLLogo,      alt: 'GML'}
             ],
             projectsHeight: '0',
